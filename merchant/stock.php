@@ -12,7 +12,6 @@
      <script src="../js/bulma.js"></script>
 </head>
 <body class="is-light">
-
 <!-- HEADER -->
 <?php
 require 'header_dashboard.php';
@@ -144,7 +143,7 @@ $quantity=$rowinventory['quantity'];
   <td><?php echo $price; ?></td>
   <td><?php echo $quantity; ?></td>
   <td>
-    <a class="button is-warning butt has-tooltip-active" data-tooltip="Edit" target="targetframe" onclick="loadgif()" href="edit_stock.php?id=<?php echo $inventory_id;?>"><i class="fa fa-edit"></i>&nbsp;Edit</a>
+    <a class="button is-warning butt has-tooltip-active" data-tooltip="Edit"  href="edit_stock.php?id=<?php echo $inventory_id;?>"><i class="fa fa-edit"></i>&nbsp;Edit</a>
     <a class="button is-danger has-tooltip-danger" data-tooltip="Delete" target="targetframe" onclick="loadgif()" href="delete_stock.php?id=<?php echo $inventory_id;?>"><i class="fa fa-trash"></i>&nbsp;Delete</a>
   </td>
 </tr>
