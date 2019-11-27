@@ -67,10 +67,14 @@ $cylinder_size=$rowinventory['cylinder_size'];
 $gas_brand=$rowinventory['gas_brand'];
 $price=$rowinventory['price']*$quantity;
 $merchant_id=$rowinventory['merchant_id'];
-// CLIENT
+// COMPANY
   $name=mysqli_query($con,"SELECT * FROM tbl_companies WHERE merchant_id='$merchant_id'");
   while ($rowname=$name->fetch_assoc()) {
   $company=$rowname['name'];
+  }
+  $cont=mysqli_query($con,"SELECT * FROM tbl_merchants WHERE id='$merchant_id'");
+  while ($rowname=$cont->fetch_assoc()) {
+  $contact=$rowname['phone'];
   }
 }
 // STATUS
@@ -101,7 +105,7 @@ $merchant_id=$rowinventory['merchant_id'];
 	<td><?php echo $cylinder_size; ?> (Kgs)</td>
 	<td><?php echo $gas_brand; ?></td>
 	<td><?php echo $quantity; ?></td>
-	<td><?php echo $company; ?></td>
+	<td><?php echo $company; ?><br><i class="fa fa-phone"></i>&nbsp;<?php echo $contact; ?></td>
 	<td>Ksh <?php echo $price; ?></td>
 	<td>
 	<?php
