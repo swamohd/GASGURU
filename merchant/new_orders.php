@@ -38,6 +38,13 @@ require 'mobile_dashboard_menu.php';
 <div class="steps">
 <h1 style="color:#a88beb;" class="title is-3 has-text-left">Confirm to fulfil new orders</h1>	
 <div style="overflow-x:scroll;" class="box">
+<?php
+require '../database/dbconfig.php';
+
+// FETCH
+$history=mysqli_query($con,"SELECT * FROM tbl_orders WHERE merchant_id='$merchant_id' AND order_status='1' ORDER BY id desc");
+if (mysqli_num_rows($history)>0) {
+?>
 <table class="table is-stripped is-fullwidth is-bordered">
 	<thead>
 		<th class="has-text-primary"><sup>NO</sup></th>
@@ -51,16 +58,6 @@ require 'mobile_dashboard_menu.php';
 	</thead>
 	<tbody>
 <?php
-require '../database/dbconfig.php';
-
-$all=mysqli_query($con,"SELECT * FROM tbl_inventory WHERE merchant_id='$merchant_id'");
-if (mysqli_num_rows($all)>0) {
-
-while ($rowall=$all->fetch_assoc()) {
-$stockid=$rowall['id'];
-// FETCH
-$history=mysqli_query($con,"SELECT * FROM tbl_orders WHERE stock_id='$stockid' AND order_status='1'");
-if (mysqli_num_rows($history)>0) {
 while ($rowhistory=$history->fetch_assoc()) {
 $order_id=$rowhistory['id'];
 $inventory_id=$rowhistory['stock_id'];
@@ -122,26 +119,17 @@ $location_id=$rowcheck['id'];
 <?php
 
 }
-?>			
+?>	
+</tbody>
+</table>
 <?php
 }else{
-$none="1";
+?>
+<p>You do not have any new orders.</p>
+<?php
 }
 // FETCH
-}
-
-}else{
-?>
-<tr>
-<td colspan="7">
-	<p>You d new orders</p>
-</td>
-</tr>
-<?php
-}
-?>
-</tbody>
-</table>	
+?>	
 </div>
 
 
